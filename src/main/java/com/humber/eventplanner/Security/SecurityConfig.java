@@ -1,4 +1,4 @@
-package com.humber.eventplanner.security;
+package com.humber.eventplanner.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
