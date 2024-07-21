@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -19,8 +22,6 @@ public class Club {
     private String name;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_category_id")
-    @Cascade(CascadeType.PERSIST)
-    private Admin admin;
+    @DBRef
+    private Collection<User> users;
 }

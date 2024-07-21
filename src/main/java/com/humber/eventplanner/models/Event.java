@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Data
 @Document(collection = "events")
@@ -24,8 +26,6 @@ public class Event {
     private LocalDateTime endTime;
     private String location;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_category_id")
-    @Cascade(CascadeType.PERSIST)
-    private Club club;
+    @DBRef
+    private Collection<Club> clubs;
 }
