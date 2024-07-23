@@ -1,13 +1,13 @@
 package com.humber.eventplanner.models;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -17,13 +17,14 @@ import java.util.Collection;
 @AllArgsConstructor
 public class Event {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @MongoId
     private Integer id;
     private String title;
     private String description;
+    @DateTimeFormat(pattern="dd-MM-yyyy HH:mm")
     private LocalDateTime startTime;
+    @DateTimeFormat(pattern="dd-MM-yyyy HH:mm")
     private LocalDateTime endTime;
     private String location;
-    private Integer organizerId;
+    private Integer clubId;
 }

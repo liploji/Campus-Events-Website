@@ -20,31 +20,31 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public Optional<Event> getEventById(String id) {
-        return eventRepository.findById(id);
+    public Event getEventById(int id) {
+        return eventRepository.findById(id).orElse(null);
     }
 
-    public Event createEvent(Event event) {
-        return eventRepository.save(event);
+    public void createEvent(Event event) {
+        if(eventRepository.findEventByTitle(event.getTitle()) != null) {
+            throw new IllegalStateException("Club with name "+ event.getTitle()+" already exists");
+        }
+        eventRepository.save(event);
     }
 
-    public Optional<Event> updateEvent(String id, Event eventDetails) {
-        Optional<Event> event = eventRepository.findById(id);
-        if (event.isPresent()) {
-            Event existingEvent = event.get();
-            existingEvent.setTitle(eventDetails.getTitle());
-            existingEvent.setDescription(eventDetails.getDescription());
-            existingEvent.setStartTime(eventDetails.getStartTime());
-            existingEvent.setEndTime(eventDetails.getEndTime());
-            existingEvent.setLocation(eventDetails.getLocation());
-//            existingEvent.setOrganizerId(eventDetails.getOrganizerId());
-            return Optional.of(eventRepository.save(existingEvent));
+    public void updateEvent(int id, Event event) {
+        if (eventRepository.existsById(id)){
+            event.setId(id);
+            eventRepository.save(event);
         } else {
-            return Optional.empty();
+            throw new IllegalStateException("Event with id " + id + " does not exist! Cannot update.");
         }
     }
 
-    public void deleteEvent(String id) {
-        eventRepository.deleteById(id);
+    public void deleteEvent(int id) {
+        if (eventRepository.existsById(id)) {
+            eventRepository.deleteById(id);
+        } else {
+            throw new IllegalStateException("Event with id " + id + " does not exist! Cannot delete.");
+        }
     }
 }
