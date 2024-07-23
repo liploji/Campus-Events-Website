@@ -25,7 +25,5 @@ public class Event {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String location;
-
-    @DBRef
-    private Collection<Club> clubs;
+    private Integer organizerId;
 }

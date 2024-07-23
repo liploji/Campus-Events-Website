@@ -21,7 +21,4 @@ public class Club {
     private Integer id;
     private String name;
     private String description;
-
-    @DBRef
-    private Collection<User> users;
 }

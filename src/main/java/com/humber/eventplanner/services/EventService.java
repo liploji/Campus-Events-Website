@@ -37,7 +37,7 @@ public class EventService {
             existingEvent.setStartTime(eventDetails.getStartTime());
             existingEvent.setEndTime(eventDetails.getEndTime());
             existingEvent.setLocation(eventDetails.getLocation());
-            existingEvent.setOrganizerId(eventDetails.getOrganizerId());
+//            existingEvent.setOrganizerId(eventDetails.getOrganizerId());
             return Optional.of(eventRepository.save(existingEvent));
         } else {
             return Optional.empty();
