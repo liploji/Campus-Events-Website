@@ -26,5 +26,5 @@ public class Event {
     @DateTimeFormat(pattern="dd-MM-yyyy HH:mm")
     private LocalDateTime endTime;
     private String location;
-    private Integer clubId;
+    private Integer userId;
 }
