@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Data
 @NoArgsConstructor
-@Document(collection = "admins")
+@Document(collection = "users")
 @AllArgsConstructor
 public class User {
 
@@ -17,6 +17,7 @@ public class User {
     private String first_name;
     private String last_name;
     private String password;
+    private String username;
     private String email;
     private String role;
 }

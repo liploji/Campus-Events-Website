@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public void createUser(User user) {
-        if(userRepository.findUserByEmail(user.getEmail()) != null) {
+        if(userRepository.findUserByUsername(user.getUsername()) != null) {
             throw new IllegalStateException("Club with name "+ user.getEmail()+" already exists");
         }
         userRepository.save(user);
@@ -46,5 +46,9 @@ public class UserService {
         } else {
             throw new IllegalStateException("User with id " + id + " does not exist! Cannot delete.");
         }
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
 }
