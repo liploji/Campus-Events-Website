@@ -1,6 +1,5 @@
 package com.humber.eventplanner.repositories;
 
-import com.humber.eventplanner.models.Club;
 import com.humber.eventplanner.models.Event;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

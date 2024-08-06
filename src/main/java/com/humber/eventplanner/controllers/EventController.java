@@ -1,9 +1,7 @@
 package com.humber.eventplanner.controllers;
 
 import com.humber.eventplanner.models.Event;
-import com.humber.eventplanner.services.ClubService;
 import com.humber.eventplanner.services.EventService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.core.Authentication;
@@ -11,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
