@@ -67,5 +67,15 @@ public class EventController {
 
         return ResponseEntity.ok("Event deleted successfully");
     }
+    // add user to an event
+    @PostMapping("/events/{eventId}/join")
+    public ResponseEntity<String> addUserToEvent(@PathVariable Integer eventId, @RequestParam Integer userId) {
+        try {
+            eventService.addUserToEvent(userId, eventId);
+            return ResponseEntity.ok("User successfully added to the event");
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 }

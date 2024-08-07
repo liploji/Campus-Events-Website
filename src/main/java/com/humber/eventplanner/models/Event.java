@@ -1,6 +1,5 @@
 package com.humber.eventplanner.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,7 +8,8 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
+
+import java.util.List;
 
 @Data
 @Document(collection = "events")
@@ -27,4 +27,8 @@ public class Event {
     private LocalDateTime endTime;
     private String location;
     private Integer userId;
+    private Integer clubId;
+
+    // new field for storing registration IDs
+    private List<String> registrationIds;
 }

@@ -1,11 +1,11 @@
 package com.humber.eventplanner.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -13,9 +13,9 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Document(collection = "event_registrations")
 public class EventRegistration {
 
-    @MongoId
-    private Integer registrationId;
+    @Id
+    private String id;  // so MongoDB can generate id
     private Integer userId;
     private Integer eventId;
-
+    private LocalDateTime registrationTime;
 }

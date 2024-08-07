@@ -1,12 +1,12 @@
 package com.humber.eventplanner.services;
 
 import com.humber.eventplanner.models.User;
-import com.humber.eventplanner.models.User;
+
 import com.humber.eventplanner.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class UserService {
