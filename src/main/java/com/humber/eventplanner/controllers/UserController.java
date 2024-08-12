@@ -15,9 +15,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final EventService eventService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, EventService eventService) {
         this.userService = userService;
+        this.eventService = eventService;
     }
 
     @GetMapping("/users")
@@ -74,6 +76,15 @@ public class UserController {
         } catch (IllegalArgumentException e) {
             // Return a 401 Unauthorized status with an error message
             return ResponseEntity.status(401).body("Authentication failed: " + e.getMessage());
+        }
+    }
+    @GetMapping("/users/{id}/events")
+    public ResponseEntity<List<Event>> getUserEvents(@PathVariable String id) {
+        try {
+            List<Event> events = eventService.getEventsByUserId(id);
+            return ResponseEntity.ok(events);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body(null);
         }
     }
 
