@@ -67,7 +67,7 @@ public class UserController {
         }
     }
     @GetMapping("/users/{id}/events")
-    public ResponseEntity<List<Event>> getUserEvents(@PathVariable int id) {
+    public ResponseEntity<List<Event>> getUserEvents(@PathVariable String id) {
         try {
             List<Event> events = eventService.getEventsByUserId(id);
             return ResponseEntity.ok(events);

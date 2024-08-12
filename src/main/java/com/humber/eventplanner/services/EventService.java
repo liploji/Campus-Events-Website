@@ -90,7 +90,7 @@ public class EventService {
         eventRepository.save(event);
     }
 
-    public List<Event> getEventsByUserId(int userId) {
+    public List<Event> getEventsByUserId(String userId) {
         List<EventRegistration> registrations = eventRegistrationRepository.findByUserId(userId);
         return registrations.stream()
                 .map(registration -> eventRepository.findById(registration.getEventId())

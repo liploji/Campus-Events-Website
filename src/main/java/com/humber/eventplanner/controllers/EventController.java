@@ -2,6 +2,7 @@ package com.humber.eventplanner.controllers;
 
 import com.humber.eventplanner.models.Event;
 import com.humber.eventplanner.services.EventService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.core.Authentication;
@@ -74,7 +75,15 @@ public class EventController {
             eventService.addUserToEvent(userId, eventId);
             return ResponseEntity.ok("User successfully added to the event");
         } catch (IllegalStateException e) {
+            // Log the error
+            System.err.println("Error adding user to event: " + e.getMessage());
+            e.printStackTrace();  // This will print the stack trace to your server logs
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            // Log any unexpected errors
+            System.err.println("Unexpected error adding user to event: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
         }
     }
 
