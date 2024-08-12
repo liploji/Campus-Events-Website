@@ -1,5 +1,6 @@
 package com.humber.eventplanner.controllers;
 
+import com.humber.eventplanner.dto.LoginRequest;
 import com.humber.eventplanner.models.Event;
 import com.humber.eventplanner.models.User;
 import com.humber.eventplanner.services.EventService;
@@ -61,6 +62,16 @@ public class UserController {
             return ResponseEntity.ok("User deleted successfully");
         } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/users/authenticate")
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            User user = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
+            return ResponseEntity.ok("User authenticated successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(401).body("Authentication failed: " + e.getMessage());
         }
     }
 }
