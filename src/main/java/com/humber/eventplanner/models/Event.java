@@ -25,7 +25,7 @@ public class Event {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String location;
-    private Integer userId;
+    private String userId;
 
     // new field for storing registration IDs
     private List<String> registrationIds;
