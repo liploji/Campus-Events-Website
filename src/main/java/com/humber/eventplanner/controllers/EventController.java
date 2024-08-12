@@ -27,7 +27,7 @@ public class EventController {
 
     //get event by id
     @GetMapping("/events/{id}")
-    public ResponseEntity<Event> getEventById(@PathVariable int id) {
+    public ResponseEntity<Event> getEventById(@PathVariable String id) {
         return ResponseEntity.ok(eventService.getEventById(id));
     }
 
@@ -45,7 +45,7 @@ public class EventController {
     }
     //update event
     @PutMapping("/events/{id}")
-    public ResponseEntity<String> updateEvent(@PathVariable int id, @RequestBody Event event) {
+    public ResponseEntity<String> updateEvent(@PathVariable String id, @RequestBody Event event) {
 
         try {
             eventService.updateEvent(id, event);
@@ -58,7 +58,7 @@ public class EventController {
 
     //delete event
     @DeleteMapping("/events/{id}")
-    public ResponseEntity<String> deleteEvent(@PathVariable int id) {
+    public ResponseEntity<String> deleteEvent(@PathVariable String id) {
         try {
             eventService.deleteEvent(id);
         } catch (IllegalStateException e) {
@@ -69,7 +69,7 @@ public class EventController {
     }
     // add user to an event
     @PostMapping("/events/{eventId}/join")
-    public ResponseEntity<String> addUserToEvent(@PathVariable Integer eventId, @RequestParam Integer userId) {
+    public ResponseEntity<String> addUserToEvent(@PathVariable String eventId, @RequestParam String userId) {
         try {
             eventService.addUserToEvent(userId, eventId);
             return ResponseEntity.ok("User successfully added to the event");

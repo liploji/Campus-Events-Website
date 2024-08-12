@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable int id) {
+    public ResponseEntity<User> getUserById(@PathVariable String id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody User user) {
+    public ResponseEntity<String> updateUser(@PathVariable String id, @RequestBody User user) {
         try {
             userService.updateUser(id, user);
             return ResponseEntity.ok("User updated successfully");
@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteUser(@PathVariable String id) {
         try {
             userService.deleteUser(id);
             return ResponseEntity.ok("User deleted successfully");

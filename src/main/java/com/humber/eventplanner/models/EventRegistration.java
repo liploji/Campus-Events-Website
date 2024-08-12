@@ -15,7 +15,7 @@ public class EventRegistration {
 
     @Id
     private String id;  // so MongoDB can generate id
-    private Integer userId;
-    private Integer eventId;
+    private String userId;
+    private String eventId;
     private LocalDateTime registrationTime;
 }

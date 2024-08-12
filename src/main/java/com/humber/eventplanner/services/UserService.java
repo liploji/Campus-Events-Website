@@ -20,7 +20,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(int id) {
+    public User getUserById(String id) {
         return userRepository.findById(id).orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void updateUser(int id, User user) {
+    public void updateUser(String id, User user) {
         if (userRepository.existsById(id)){
             user.setId(id);
             userRepository.save(user);
@@ -40,7 +40,7 @@ public class UserService {
         }
     }
 
-    public void deleteUser(int id) {
+    public void deleteUser(String id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
         } else {

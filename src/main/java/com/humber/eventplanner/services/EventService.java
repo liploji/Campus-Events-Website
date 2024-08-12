@@ -31,7 +31,7 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public Event getEventById(int id) {
+    public Event getEventById(String id) {
         return eventRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Event with id " + id + " not found"));
     }
@@ -43,7 +43,7 @@ public class EventService {
         eventRepository.save(event);
     }
 
-    public void updateEvent(int id, Event event) {
+    public void updateEvent(String id, Event event) {
         if (eventRepository.existsById(id)){
             event.setId(id);
             eventRepository.save(event);
@@ -52,7 +52,7 @@ public class EventService {
         }
     }
 
-    public void deleteEvent(int id) {
+    public void deleteEvent(String id) {
         if (eventRepository.existsById(id)) {
             eventRepository.deleteById(id);
         } else {
@@ -60,7 +60,7 @@ public class EventService {
         }
     }
 
-    public void addUserToEvent(Integer userId, Integer eventId) {
+    public void addUserToEvent(String userId, String eventId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException("User not found"));
 
