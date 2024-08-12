@@ -1,8 +1,11 @@
 package com.humber.eventplanner.services;
 
+import com.humber.eventplanner.config.SecurityConfig;
 import com.humber.eventplanner.models.User;
 
 import com.humber.eventplanner.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +15,11 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    private UserService(UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    private UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> getAllUsers() {
@@ -28,12 +34,14 @@ public class UserService {
         if(userRepository.findUserByUsername(user.getUsername()) != null) {
             throw new IllegalStateException("Club with name "+ user.getEmail()+" already exists");
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
     public void updateUser(String id, User user) {
         if (userRepository.existsById(id)){
             user.setId(id);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
         } else {
             throw new IllegalStateException("User with id " + id + " does not exist! Cannot update.");
@@ -51,4 +59,22 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
+
+    public boolean verifyPassword(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
+
+    public User authenticateUser(String username, String rawPassword) {
+        User user = userRepository.findUserByUsername(username);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+
+        if (verifyPassword(rawPassword, user.getPassword())) {
+            return user;
+        } else {
+            throw new IllegalArgumentException("Invalid password");
+        }
+    }
 }
+
