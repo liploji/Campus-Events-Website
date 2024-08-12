@@ -14,10 +14,13 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final EventService eventService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, EventService eventService) {
         this.userService = userService;
+        this.eventService = eventService;
     }
+
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -61,6 +64,15 @@ public class UserController {
             return ResponseEntity.ok("User deleted successfully");
         } catch (IllegalStateException e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
+    @GetMapping("/users/{id}/events")
+    public ResponseEntity<List<Event>> getUserEvents(@PathVariable int id) {
+        try {
+            List<Event> events = eventService.getEventsByUserId(id);
+            return ResponseEntity.ok(events);
+        } catch (IllegalStateException e) {
+            return ResponseEntity.badRequest().body(null);
         }
     }
 }

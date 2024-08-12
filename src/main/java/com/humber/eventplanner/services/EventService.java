@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -87,5 +88,13 @@ public class EventService {
         }
         event.getRegistrationIds().add(savedRegistration.getId());
         eventRepository.save(event);
+    }
+
+    public List<Event> getEventsByUserId(int userId) {
+        List<EventRegistration> registrations = eventRegistrationRepository.findByUserId(userId);
+        return registrations.stream()
+                .map(registration -> eventRepository.findById(registration.getEventId())
+                        .orElseThrow(() -> new IllegalStateException("Event not found")))
+                .collect(Collectors.toList());
     }
 }
