@@ -66,12 +66,15 @@ public class UserController {
     }
 
     @PostMapping("/users/authenticate")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         try {
             User user = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
-            return ResponseEntity.ok("User authenticated successfully");
+            // Return the user object as JSON
+            return ResponseEntity.ok(user);
         } catch (IllegalArgumentException e) {
+            // Return a 401 Unauthorized status with an error message
             return ResponseEntity.status(401).body("Authentication failed: " + e.getMessage());
         }
     }
+
 }
