@@ -75,12 +75,12 @@ public class EventController {
             eventService.addUserToEvent(userId, eventId);
             return ResponseEntity.ok("User successfully added to the event");
         } catch (IllegalStateException e) {
-            // Log the error
+            // logs the error if user cant register for an event
             System.err.println("Error adding user to event: " + e.getMessage());
-            e.printStackTrace();  // This will print the stack trace to your server logs
+            e.printStackTrace();  // prints the stack trace to your server logs
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
-            // Log any unexpected errors
+            // shows any unexpected errors
             System.err.println("Unexpected error adding user to event: " + e.getMessage());
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
