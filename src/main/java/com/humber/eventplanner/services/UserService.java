@@ -32,7 +32,7 @@ public class UserService {
 
     public void createUser(User user) {
         if(userRepository.findUserByUsername(user.getUsername()) != null) {
-            throw new IllegalStateException("Club with name "+ user.getEmail()+" already exists");
+            throw new IllegalStateException("Username "+ user.getUsername()+" already exists");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);

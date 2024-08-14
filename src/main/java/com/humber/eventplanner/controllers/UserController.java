@@ -43,7 +43,7 @@ public class UserController {
             userService.createUser(user);
             return ResponseEntity.ok("User added successfully");
         } catch (IllegalStateException e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().body( e.getMessage());
         }
     }
 
